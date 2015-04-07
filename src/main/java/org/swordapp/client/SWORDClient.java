@@ -12,13 +12,15 @@ import org.apache.abdera.protocol.client.ClientResponse;
 import org.apache.abdera.protocol.client.RequestOptions;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -28,7 +30,7 @@ import java.util.Date;
 
 public class SWORDClient
 {
-    private static Logger log = Logger.getLogger(SWORDClient.class);
+    private static Logger log = LoggerFactory.getLogger(SWORDClient.class);
 
     private ClientConfiguration config;
 
@@ -764,10 +766,11 @@ public class SWORDClient
 		http.addContentMd5(options, deposit.getMd5());
 		http.addMetadataRelevant(options, deposit.isMetadataRelevant());
 		http.addPackaging(options, deposit.getPackaging());
+		options.setUseChunked(true);
 
 		// prepare the content to be delivered
-		InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
-
+		InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getContentLength(),
+				deposit.getMimeType());
 		// carry out the deposit
 		if (log.isDebugEnabled())
 		{
@@ -1521,6 +1524,7 @@ public class SWORDClient
                 try
                 {
                     client.addCredentials(auth.getTarget(), auth.getRealm(), "basic", unpw);
+                    client.usePreemptiveAuthentication(true);
                 }
                 catch (URISyntaxException e)
                 {

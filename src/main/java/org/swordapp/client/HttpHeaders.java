@@ -2,7 +2,8 @@ package org.swordapp.client;
 
 import org.apache.abdera.protocol.client.ClientResponse;
 import org.apache.abdera.protocol.client.RequestOptions;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ import java.util.Date;
 
 public class HttpHeaders
 {
-    private static Logger log = Logger.getLogger(HttpHeaders.class);
+	private static Logger log = LoggerFactory.getLogger(HttpHeaders.class);
 
     public void addContentDisposition(RequestOptions options, String filename)
             throws SWORDClientException

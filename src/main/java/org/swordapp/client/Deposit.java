@@ -8,6 +8,7 @@ public class Deposit
     private InputStream file = null;
     private String filename = null;
     private String mimeType = null;
+    private long contentLength = -2;
     private String slug = null;
     private String md5 = null;
     private String packaging;
@@ -100,6 +101,14 @@ public class Deposit
     {
         this.mimeType = mimeType;
     }
+    
+	public long getContentLength() {
+		return contentLength;
+	}
+
+	public void setContentLength(long contentLength) {
+		this.contentLength = contentLength;
+	}
 
 	public void setSuggestedIdentifier(String slug)
 	{

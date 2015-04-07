@@ -4,15 +4,17 @@ import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Element;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.activation.MimeType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceDocument
 {
-    private static Logger log = Logger.getLogger(ServiceDocument.class);
+	private static Logger log = LoggerFactory.getLogger(ServiceDocument.class);
 
     private Service service;
 
