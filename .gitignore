@@ -1,4 +1,6 @@
 .idea/
 sword2-client.iml
 target/
-
+.settings/
+.classpath
+.project
